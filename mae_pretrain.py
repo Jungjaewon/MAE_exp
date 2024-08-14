@@ -81,7 +81,9 @@ if __name__ == '__main__':
         wandb.log({'train_loss': avg_loss})
         print(f'In epoch {e}, average traning loss is {avg_loss}.')
 
+
         ''' visualize the first 16 predicted images on val dataset'''
+        """
         model.eval()
         cnt = 0
         with torch.no_grad():
@@ -97,6 +99,6 @@ if __name__ == '__main__':
                 img = img.astype(np.uint8) * 255
                 cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
                 cnt += 1
-
+        """
         ''' save model '''
         torch.save(model, os.path.join(train_dir, args.model_path))
