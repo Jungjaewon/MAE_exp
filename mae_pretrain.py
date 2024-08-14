@@ -94,8 +94,9 @@ if __name__ == '__main__':
                 img = rearrange(img, '(v h1 w1) c h w -> (h1 h) (w1 v w) c', w1=2, v=3)
                 img = (img + 1) / 2
                 img = img.cpu().detach().numpy()
-                print(np.shape(img))
-                print(img.dtype)
+                #print(np.shape(img))
+                #print(img.dtype)
+                img = img.astype(np.uint8)
                 cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
                 cnt += 1
 
