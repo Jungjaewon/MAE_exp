@@ -84,15 +84,16 @@ if __name__ == '__main__':
         model.eval()
         cnt = 0
         with torch.no_grad():
-            val_img = torch.stack([val_dataset[i][0] for i in range(16)])
-            val_img = val_img.to(device)
-            predicted_val_img, mask = model(val_img)
-            predicted_val_img = predicted_val_img * mask + val_img * (1 - mask)
-            img = torch.cat([val_img * (1 - mask), predicted_val_img, val_img], dim=0)
-            img = rearrange(img, '(v h1 w1) c h w -> c (h1 h) (w1 v w)', w1=2, v=3)
-            img = (img + 1) / 2
-            img = img.detach().numpy()
-            cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
+            val_data_loader = val_dataset
+            for val_img, label in val_data_loader:
+                val_img = val_img.to(device)
+                predicted_val_img, mask = model(val_img)
+                predicted_val_img = predicted_val_img * mask + val_img * (1 - mask)
+                img = torch.cat([val_img * (1 - mask), predicted_val_img, val_img], dim=0)
+                img = rearrange(img, '(v h1 w1) c h w -> c (h1 h) (w1 v w)', w1=2, v=3)
+                img = (img + 1) / 2
+                img = img.detach().numpy()
+                cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
 
         ''' save model '''
         torch.save(model, os.path.join(train_dir, args.model_path))
