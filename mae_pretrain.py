@@ -33,7 +33,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     wandb.login(key='3b3fd7ec86b8f3f0f32f2d7a78456686d8755d99')
-    wandb.init(project=f'mae_{args.dataset}', name=args.name)
+    wandb.init(project=f'mae_{args.dataset}', name=f'{args.dataset}')
 
     setup_seed(args.seed)
 
