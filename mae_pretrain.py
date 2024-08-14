@@ -97,6 +97,7 @@ if __name__ == '__main__':
                 img = img.astype(np.uint8)
                 print(np.shape(img))
                 print(img.dtype)
+                print(np.max(img), np.min(img))
                 cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
                 cnt += 1
 
