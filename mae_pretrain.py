@@ -5,6 +5,7 @@ import torch
 import torchvision
 import wandb
 import cv2
+import numpy as np
 wandb.require("core")
 
 from torch.utils.tensorboard import SummaryWriter
@@ -93,6 +94,7 @@ if __name__ == '__main__':
                 img = rearrange(img, '(v h1 w1) c h w -> c (h1 h) (w1 v w)', w1=2, v=3)
                 img = (img + 1) / 2
                 img = img.cpu().detach().numpy()
+                print(np.shape(img))
                 cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
                 cnt += 1
 
