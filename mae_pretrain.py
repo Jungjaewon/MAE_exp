@@ -95,6 +95,7 @@ if __name__ == '__main__':
                 img = (img + 1) / 2
                 img = img.cpu().detach().numpy()
                 print(np.shape(img))
+                print(img.dtype)
                 cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
                 cnt += 1
 
