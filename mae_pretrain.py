@@ -91,7 +91,7 @@ if __name__ == '__main__':
                 predicted_val_img, mask = model(val_img)
                 predicted_val_img = predicted_val_img * mask + val_img * (1 - mask)
                 img = torch.cat([val_img * (1 - mask), predicted_val_img, val_img], dim=0)
-                img = rearrange(img, '(v h1 w1) c h w -> c (h1 h) (w1 v w)', w1=2, v=3)
+                img = rearrange(img, '(v h1 w1) c h w -> (h1 h) (w1 v w) c', w1=2, v=3)
                 img = (img + 1) / 2
                 img = img.cpu().detach().numpy()
                 print(np.shape(img))
