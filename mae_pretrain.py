@@ -94,6 +94,7 @@ if __name__ == '__main__':
                 img = (img + 1) / 2
                 img = img.cpu().detach().numpy()
                 cv2.imwrite(os.path.join(train_dir, f'val_{cnt}.jpg'), img)
+                cnt += 1
 
         ''' save model '''
         torch.save(model, os.path.join(train_dir, args.model_path))
