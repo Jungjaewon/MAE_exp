@@ -51,7 +51,7 @@ if __name__ == '__main__':
         val_dataset = torchvision.datasets.CIFAR10('data', train=False, download=True, transform=Compose([ToTensor(), Normalize(0.5, 0.5)]))
         dataloader = torch.utils.data.DataLoader(train_dataset, load_batch_size, shuffle=True, num_workers=4)
     elif args.dataset == 'polyvore':
-        train_loader, val_loader = get_loader(args)
+        train_dataset, val_dataset = get_loader(args)
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
